@@ -1,0 +1,238 @@
+\documentclass[compress]{beamer}
+
+
+
+
+\usepackage[latin1]{inputenc}
+\usepackage[english]{babel}
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage{pifont}
+\usepackage{tikz}
+\usepackage{xcolor}
+\usetikzlibrary{chains,fit,shapes}
+\usetikzlibrary{automata, positioning, arrows}
+\usepackage{stackengine}
+% \usepackage{times,mathptmx}
+\usepackage{enumerate}
+%\usepackage{fullpage}
+\usepackage[T1]{fontenc}
+%\usepackage{dsfont}\let\mathbb\mathds
+\usepackage{textcomp}
+%\usepackage{graphics}
+\usepackage[all]{xy}
+%\usepackage[pdftex]{graphicx}
+%\usepackage{hyperref}% hyperliens dans le PDF, pas pour impression
+%\usepackage{dsfont}\let\mathbb\mathds
+%package de lettres calligraphiques: \mathscr{}
+\usepackage{mathrsfs}
+\usepackage{graphicx}
+%\usepackage{fourier}
+%\usepackage[export=pgf]{texgraph}
+\newcommand {\style}[1]{Color:=#1, LineStyle:=solid, Width:=8}
+\usefonttheme[onlymath]{serif}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+
+\mode<presentation>
+{
+  \usetheme{Darmstadt}% Darmstadt Warsaw Antibes Boadilla(slides #)
+  % \usetheme[secheader]{Boadilla}
+  \useoutertheme[subsection=false]{miniframes}
+  % \usecolortheme{crane}
+  \setbeamercovered{transparent=5}
+  \definecolor{umhblue}{rgb}{.69,.75,.86}
+  \definecolor{umhdarkblue}{rgb}{.15,.15,.53}% for ``Darmstadt'' theme
+  \definecolor{umhred}{rgb}{0.4,.0,.0}
+  \definecolor{problem}{rgb}{0.84,0.5,0}
+%  \definecolor{thm title}{RGB}{172, 10, 45}
+\definecolor{thm title}{rgb}{0.4,.0,.0}
+  
+  \definecolor{blockTitleBg}{RGB}{24,80,214}
+  \definecolor{blockTitleFg}{RGB}{233,246,252}
+  \setbeamercolor{block title}{bg=blockTitleBg,fg=blockTitleFg}
+  \setbeamercolor{block body}{bg=blockTitleFg}
+  
+  \definecolor{mauve}{RGB}{179, 52, 77}
+  \definecolor{mauveclair}{RGB}{255,241,244}
+  \setbeamercolor{block title alerted}{bg=mauve,fg=mauveclair}
+  \setbeamercolor{block body alerted}{bg=mauveclair}
+  
+  \setbeamercolor{block title example}{bg=gray!80,fg=gray!10}
+  \setbeamercolor{block body example}{bg=gray!10}
+
+  
+%  \renewcommand{\emph}[1]{%
+%    \textcolor{orangered}{#1}}
+}
+\definecolor{fondtitre}{rgb}{0.20,0.43,0.09}  % vert fonce
+\definecolor{coultitre}{rgb}{1.0,1.0,1.0} 				%blanc
+%\definecolor{fondtexte}{rgb}{1,0.95,0.86}     % ivoire
+\beamerboxesdeclarecolorscheme{myScheme}{fondtitre!70}{coultitre!20}
+\newenvironment{Conjecture}{\begin{beamerboxesrounded}[scheme=myScheme,shadow=true]{Conjecture}}{\end{beamerboxesrounded}}
+\newenvironment{NConjecture}{\begin{beamerboxesrounded}[scheme=myScheme,shadow=true]{Naive Conjecture}}{\end{beamerboxesrounded}}
+\newcommand{\Qp}{\mathbb{Q}_p}
+\newcommand{\Qpan}{\mathbb{Q}_{p,\text{an}}}
+\newcommand{\Zp}{\mathbb{Z}_p}
+\newcommand{\Fp}{\mathbb{F}_p}
+\newcommand{\Cp}{\mathbb{C}_p}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Kan}{K_\text{an}}
+\newcommand{\Rex}{\mathbb{R}_\text{exp}}
+\newcommand{\Zpex}{\mathbb{Z}_{p,\text{exp}}}
+\newcommand{\Lex}{\mathcal{L}_{\text{exp}}}
+\newcommand{\AVal}{\mathcal{O}_m}
+\newcommand{\Rightleftarrow}{\Leftrightarrow}
+\newcommand{\rightleftarrow}{\leftrightarrow}
+\newcommand{\eme}[1]{{#1}$^{\text{?me}}$}
+\newcommand{\PG}[1]{P_{#1}(G)}
+\newcommand{\normal}{\vartriangleleft}
+\newcommand{\ultraprod}[1]{{\prod}^\mathcal{#1}}
+\newcommand{\suppure}{\ {}_1\!\!\supseteq}
+\newcommand{\longueur}[1]{\langle #1 \rangle}
+\def\rest#1#2{\mathchoice
+              {\setbox1\hbox{${\displaystyle #1}_{\scriptstyle #2}$}
+              \restrictionaux{#1}{#2}}
+              {\setbox1\hbox{${\textstyle #1}_{\scriptstyle #2}$}
+              \restrictionaux{#1}{#2}}
+              {\setbox1\hbox{${\scriptstyle #1}_{\scriptscriptstyle #2}$}
+              \restrictionaux{#1}{#2}}
+              {\setbox1\hbox{${\scriptscriptstyle #1}_{\scriptscriptstyle #2}$}
+              \restrictionaux{#1}{#2}}}
+\def\restrictionaux#1#2{{#1\,\smash{\vrule height .8\ht1 depth .85\dp1}}_{\,#2}} 
+\newcommand{\abs}[1]{\left| #1\right|}
+
+
+
+%\newtheorem{theorem}{Th?or?me}[section]
+\newtheorem{prop}{Proposition}
+\newtheorem{lemme}{Lemma}
+\newtheorem{cor}{Corollary}
+%\newtheorem{definition}[theorem]{D?finition}
+\newtheorem{Fait}{Fait}
+\newtheorem*{conj}{Conjecture}
+\newtheorem{conjecture}{Conjecture}
+\newtheorem*{fait}{Fait}
+\newtheorem*{theorem*}{Theorem}
+
+\theoremstyle{remark}
+\newtheorem{Exp}{Example}[section]
+\newtheorem*{exemple}{Example}
+\newtheorem*{algo}{Algorithm}
+\newtheorem{exemples}{Examples}
+\newtheorem*{claim}{Claim}
+%\newtheorem*{prop}{Proposition}
+\newtheorem*{remarque}{Remark}
+\newtheorem*{notation}{Notation}
+\newtheorem{cas}{Particular case}
+
+\title{Pneumonia Detection}
+\author{Nathana\"el Mariaule}
+\institute{}
+
+
+
+\date{31 August 2021}
+
+\begin{document}
+
+
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\AtBeginSection{
+  \begin{frame}<beamer>
+    \frametitle{Plan}
+    \tableofcontents[currentsection,hideallsubsections]% hideothersubsections
+ \end{frame}
+}
+
+\begin{frame}
+The goal of the project is to build a machine learning model that diagnoses pneumonia based on a chest X-ray.
+
+
+\end{frame}
+
+\begin{frame}{Preprocession of the images}
+
+\begin{itemize}
+\item Resize (150,150)
+\item 1 channel for grayscale
+\item values between 0-1
+\item Random data augmentation (rotation, flip, zoom and shift)
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{The Model}
+\begin{table}
+\centering
+\scalebox{0.7}{
+\begin{tabular}{|c|}
+\hline
+Conv2D 32 kernel 3x3 \\
+Conv2D 32 kernel 3x3 \\
+BatchNormalisation\\
+MaxPooling 2x2\\
+\hline
+Conv2D 64 kernel 3x3 \\
+Conv2D 64 kernel 3x3 \\
+BatchNormalisation\\
+MaxPooling 2x2\\
+ \hline
+Conv2D 258 kernel 3x3 \\
+Conv2D 258 kernel 3x3 \\
+BatchNormalisation\\
+MaxPooling 4x4\\
+\hline
+Conv2D 128 kernel 3x3 \\
+Conv2D 64 kernel 3x3 \\
+BatchNormalisation\\
+MaxPooling 2x2\\
+\hline
+Flatten\\
+Dense layer 128\\
+Dense layer 1\\
+\hline
+\end{tabular}}
+\end{table}
+\end{frame}
+
+\begin{frame}{Results}
+Accuracy of 90\%
+{
+\begin{center}
+	\includegraphics[scale=0.5]{confusion_matrix.jpg}
+\end{center}
+}
+
+\end{frame}
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
