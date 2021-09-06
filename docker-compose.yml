@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+  flask_app:
+    container_name: flask_app
+    restart: always
+    build: ./flask_app
+    command: python3 main.py
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./flask_app:/flask_app
+
